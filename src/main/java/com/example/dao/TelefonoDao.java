@@ -9,13 +9,12 @@ import com.example.entities.Telefono;
 
 public interface TelefonoDao extends JpaRepository<Telefono, Integer>{
 
-    Telefono saveTelefono(Telefono telefono);
+    
 
     boolean existsByEmpleado(Empleado empleado);
     
     void deleteByEmpleado(Empleado empleado);
     
-    List<Telefono> getAllTelefonos();
 
     List<Telefono> findByEmpleado(Empleado empleado);
     
