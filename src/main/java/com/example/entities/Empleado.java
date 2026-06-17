@@ -3,6 +3,7 @@ package com.example.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -61,10 +62,10 @@ public class Empleado implements Serializable {
     private Departamento departamento;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empleado")
-     private Set<Telefono> telefonos;
+    private Set<Telefono> telefonos = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empleado")
-    private Set<Correo> correos;
+    private Set<Correo> correos = new HashSet<>();
 
    
     

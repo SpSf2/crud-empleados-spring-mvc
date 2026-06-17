@@ -29,8 +29,8 @@ public class CrudEmpleadosSpringMvcApplication implements CommandLineRunner{
 
 	private final EmpleadoService empleadoService;
 	private final DepartamentoService departamentoService;
-	private final CorreoService correoService;
-	private final TelefonoService telefonoService;
+	//private final CorreoService correoService;
+	//private final TelefonoService telefonoService;
 	
 
 	public static void main(String[] args) {
@@ -101,7 +101,64 @@ public class CrudEmpleadosSpringMvcApplication implements CommandLineRunner{
 
 					empleadoService.saveEmpleado(empleado1);
 
-					
+		Empleado empleado2 = Empleado.builder()
+					.nombre("María")
+					.primerApellido("López")
+					.segundoApellido("Gómez")
+					.genero(Genero.MUJER)
+					.fechaAlta(LocalDate.of(2021, 3, 10))
+					.departamento(departamento2)
+					.salario(new BigDecimal(4200.75))
+					.telefonos(Set.of(Telefono.builder().numero("666666666").build(),
+					Telefono.builder().numero("777777777").build()))
+					.correos(Set.of(Correo.builder().email("emp2@g.com").build(),
+					Correo.builder().email("emp2@gg.com").build()))
+					.build();
+
+					empleado2.getTelefonos().forEach(telefono -> telefono.setEmpleado(empleado2));
+					empleado2.getCorreos().forEach(correo -> correo.setEmpleado(empleado2)); 
+
+					empleadoService.saveEmpleado(empleado2);
+
+			Empleado empleado3 = Empleado.builder()
+					.nombre("Pedro")
+					.primerApellido("Ramírez")
+					.segundoApellido("Hernández")
+					.genero(Genero.HOMBRE)
+					.fechaAlta(LocalDate.of(2022, 5, 20))
+					.departamento(departamento3)
+					.salario(new BigDecimal(3800.25))
+					.telefonos(Set.of(Telefono.builder().numero("888888888").build(),
+					Telefono.builder().numero("999999999").build()))
+					.correos(Set.of(Correo.builder().email("emp3@g.com").build(),
+					Correo.builder().email("emp3@ggg.com").build()))
+					.build();	
+
+					empleado3.getTelefonos().forEach(telefono -> telefono.setEmpleado(empleado3));
+					empleado3.getCorreos().forEach(correo -> correo.setEmpleado(empleado3)); 
+
+					empleadoService.saveEmpleado(empleado3);
+
+		Empleado empleado4 = Empleado.builder()
+					.nombre("Ana")
+					.primerApellido("Martínez")
+					.segundoApellido("Sánchez")
+					.genero(Genero.MUJER)
+					.fechaAlta(LocalDate.of(2023, 7, 	12))
+					.departamento(departamento4)
+					.salario(new BigDecimal(4100.00))
+					.telefonos(Set.of(Telefono.builder().numero("555555555").build(),
+					Telefono.builder().numero("444444444").build()))
+					.correos(Set.of(Correo.builder().email("emp4@g.com").build(),
+					Correo.builder().email("emp4@ggg.com").build()))
+					.build();
+
+					empleado4.getTelefonos().forEach(telefono -> telefono.setEmpleado(empleado4));
+					empleado4.getCorreos().forEach(correo -> correo.setEmpleado(empleado4)); 
+
+					empleadoService.saveEmpleado(empleado4);
+
+
 					
 
 	}
