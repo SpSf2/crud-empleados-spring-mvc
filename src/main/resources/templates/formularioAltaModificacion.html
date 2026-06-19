@@ -10,7 +10,7 @@
 
     <fieldset>
         <legend>Formulario de Alta o Modificacion</legend>
-        <form th:action="@{/empleados/persistir}" th:object="${empleado}" method="post">
+        <form th:action="@{/empleados/persistir}" method="post" th:object="${empleado}">
         <input type="hidden" th:field="*{id}">
         <div>
             <label for="nombre">Nombre:</label>
@@ -53,8 +53,8 @@
         </div>
         <div>
             <label for="departamentos">Departamentos:</label>
-            <select id="departamento" name="departamento">
-                <option></option>
+            <select id="departamentos" th:field="*{departamento}">
+                <option value=""></option>
                 <option th:each="dpto : ${departamentos}" th:value="${dpto.id}" th:text="${dpto.nombre}"></option>
             </select>
         </div>

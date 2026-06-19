@@ -43,14 +43,18 @@ public class EmpleadoController {
 
     //metodo para mostrar el formulario de creación de empleados
     @GetMapping("/alta")
-    public String mostrarFormularioAlta(Model model) {
+    public String mostrarFormularioAlta(Model model, @ModelAttribute Empleado empleado) {
 
         //Se necesitan los Departamentos desde la capa de Servicios y lo inyectamos arriba
         model.addAttribute("departamentos", departamentoService.getAllDepartamentos());
 
         /*Se necesita enviar un Objeto Empleado vacio, para que se vinculen sus propiedades con cada control
         (elemento, input, select, etc) del formulario */
-        model.addAttribute("empleado", new Empleado());
+
+        // El codigo siguiente se comenta porque el objeto se pasa como atributo 
+        // al modelo a traves de la anotacion @ModelAttribute que se recibe como un 
+        // parametro del metodo
+        // model.addAttribute("empleado", new Empleado());
 
         return "formularioAltaModificacion";
     }
@@ -70,7 +74,7 @@ public class EmpleadoController {
 		/*separados por comas y convertirlos en listas de objetos Telefono y Correo para
 		 * luego agregarlos al objeto Empleado antes de persistirlo en la DB */
 		
-		Set<Telefono> telefonos = new HashSet<Telefono>();
+		//Set<Telefono> telefonos = new HashSet<Telefono>();
 		
 		if(!numerosTelefono.isEmpty()&& !numerosTelefono.isBlank() ) {
 			
@@ -78,31 +82,31 @@ public class EmpleadoController {
 			List<String> listadoNumeros = Arrays.asList(arrayNumerosTelefono);
                 
         listadoNumeros.forEach(numero -> {
-            telefonos.add(Telefono.builder().numero(numero).empleado(empleado).build());
+            empleado.getTelefonos().add(Telefono.builder().numero(numero).empleado(empleado).build());
 		    });
         }
-			empleado.setTelefonos(telefonos);
+			//empleado.setTelefonos(telefonos);
 
         /*  Correos
             Sí, para correos es el mismo proceso: compruebas si el string no está vacío,
             lo separas por ;, recorres cada trozo y construyes objetos Correo o como se 
             llame tu entidad. La idea es exactamente la misma que con teléfonos. */
             
-        Set<Correo> correos = new HashSet<>();    
+        // Set<Correo> correos = new HashSet<>();    
 
         if (!dircorreos.isEmpty()&& !dircorreos.isBlank()) {
         String[] arrayCorreos = dircorreos.split(";");
         List<String> listadoCorreos = Arrays.asList(arrayCorreos);
 
         listadoCorreos.forEach(correo -> {
-            correos.add(Correo.builder()
+            empleado.getCorreos().add(Correo.builder()
                     .email(correo.trim())
                     .empleado(empleado)
                     .build());
         });
     }
 
-        empleado.setCorreos(correos);
+        //empleado.setCorreos(correos);
 
          /**Se recibe un objeto Empleado con los datos del formulario, se envia a la
          * capa de servicios para que lo guare en la DB
