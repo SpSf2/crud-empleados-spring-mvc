@@ -10,7 +10,7 @@
 
     <fieldset>
         <legend>Formulario de Alta o Modificacion</legend>
-        <form action="@{/empleados/alta}" th:object="${empleado}" method="post">
+        <form th:action="@{/empleados/persistir}" th:object="${empleado}" method="post">
         <input type="hidden" th:field="*{id}">
         <div>
             <label for="nombre">Nombre:</label>
@@ -18,38 +18,38 @@
         </div>
         <div>
             <label for="primerApellido">Primer Apellido:</label>
-            <input type="text" id="primerApellido" name="primerApellido">
+            <input type="text" id="primerApellido" name="primerApellido" required="required" th:field="*{primerApellido}">
         </div>
         <div>
             <label for="segundoApellido">Segundo Apellido:</label>
-            <input type="text" id="segundoApellido" name="segundoApellido">
+            <input type="text" id="segundoApellido" name="segundoApellido" th:field="*{segundoApellido}">
         </div>
         <div>
             <fieldset>
                 <legend>Genero</legend>   
             <label for="hombre">Hombre</label>         
-            <input type="radio" id="hombre" name="genero" value="HOMBRE">
+            <input type="radio" id="hombre" name="genero" value="HOMBRE" th:field="*{genero}">
             <label for="mujer">Mujer</label>
-            <input type="radio" id="mujer" name="genero" value="MUJER">
+            <input type="radio" id="mujer" name="genero" value="MUJER" th:field="*{genero}">
             <label for="otro">Otro</label>
-            <input type="radio" id="otro" name="genero" value="OTRO">
+            <input type="radio" id="otro" name="genero" value="OTRO" th:field="*{genero}">
             </fieldset>
         </div>
         <div>
             <label for="salario">Salario:</label>
-            <input type="text" id="salario" name="salario">
+            <input type="text" id="salario" name="salario" th:field="*{salario}">
         </div>
         <div>
             <label for="fechaAlta">Fecha de Alta:</label>
-            <input type="date" id="fechaAlta" name="fechaAlta">
+            <input type="date" id="fechaAlta" name="fechaAlta" th:field="*{fechaAlta}">
         </div>
         <div>
             <label for="numerosTelefono">Numeros de Telefono:</label>
-            <input type="text" id="numeroTelefono" name="numeroTelefono" placeholder="Uno o varios separados por ;">
+            <input type="text" id="numerosTelefono" name="numerosTelefono" placeholder="Uno o varios separados por ;">
         </div>
         <div>
-            <label for="correos">Correos:</label>
-            <input type="text" id="correo" name="correo" placeholder="Uno o varios separados por ;">
+            <label for="dircorreos">Correos:</label>
+            <input type="text" id="dircorreos" name="dircorreos" placeholder="Uno o varios separados por ;">
         </div>
         <div>
             <label for="departamentos">Departamentos:</label>
@@ -61,8 +61,8 @@
         <div>
             <button type="submit">Enviar</button>
         </div>
-
-    </fieldset>
     </form>
+    </fieldset>
+    
 </body>
 </html>
