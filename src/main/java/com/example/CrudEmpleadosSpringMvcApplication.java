@@ -16,10 +16,8 @@ import com.example.entities.Departamento;
 import com.example.entities.Empleado;
 import com.example.entities.Telefono;
 import com.example.model.Genero;
-import com.example.services.CorreoService;
 import com.example.services.DepartamentoService;
 import com.example.services.EmpleadoService;
-import com.example.services.TelefonoService;
 
 import lombok.RequiredArgsConstructor;
 
