@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,6 +19,7 @@ import com.example.entities.Telefono;
 import com.example.services.DepartamentoService;
 import com.example.services.EmpleadoService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,10 +63,22 @@ public class EmpleadoController {
 
     /*Metodo para recibir los datos del formulario de Alta de Empleado*/
     @PostMapping("/persistir")     
-    public String procesarFormuarioaltaModificacion(@ModelAttribute Empleado empleado, 
+    public String procesarFormuarioaltaModificacion(@Valid 
+        @ModelAttribute Empleado empleado, 
+        BindingResult result,
         @RequestParam String numerosTelefono,
-        @RequestParam String dircorreos) {
+        @RequestParam String dircorreos,
+        Model model) {
+        
+            //Comprobar si hay errores en la información procedente del formulario
+        if (result.hasErrors()) {
+            
+            model.addAttribute("departamentos", 
+                                departamentoService.getAllDepartamentos());
 
+            return "formularioAltaModificacion";
+        }
+        
         LOG.info("Objeto Empleado Recibido");
         LOG.info(empleado.toString());
         LOG.info("Numeros de Telefono recibidos: " + numerosTelefono);
