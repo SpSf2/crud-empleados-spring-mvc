@@ -78,7 +78,7 @@ public class CrudEmpleadosSpringMvcApplication implements CommandLineRunner{
 
 		Empleado empleado1 = Empleado.builder()
 					.nombre("Juan")
-					.primerApellido("Pérez")
+					.primerApellido("Perez")
 					.segundoApellido("García")
 					.genero(Genero.HOMBRE)
 					.fechaAlta(LocalDate.of(2020, 1, 15))
@@ -100,8 +100,8 @@ public class CrudEmpleadosSpringMvcApplication implements CommandLineRunner{
 					empleadoService.saveEmpleado(empleado1);
 
 		Empleado empleado2 = Empleado.builder()
-					.nombre("María")
-					.primerApellido("López")
+					.nombre("Maria")
+					.primerApellido("Lopez")
 					.segundoApellido("Gómez")
 					.genero(Genero.MUJER)
 					.fechaAlta(LocalDate.of(2021, 3, 10))
@@ -120,7 +120,7 @@ public class CrudEmpleadosSpringMvcApplication implements CommandLineRunner{
 
 			Empleado empleado3 = Empleado.builder()
 					.nombre("Pedro")
-					.primerApellido("Ramírez")
+					.primerApellido("Ramirez")
 					.segundoApellido("Hernández")
 					.genero(Genero.HOMBRE)
 					.fechaAlta(LocalDate.of(2022, 5, 20))
@@ -139,7 +139,7 @@ public class CrudEmpleadosSpringMvcApplication implements CommandLineRunner{
 
 		Empleado empleado4 = Empleado.builder()
 					.nombre("Anastasia")
-					.primerApellido("Martínez")
+					.primerApellido("Martinez")
 					.segundoApellido("Sánchez")
 					.genero(Genero.MUJER)
 					.fechaAlta(LocalDate.of(2023, 7, 	12))

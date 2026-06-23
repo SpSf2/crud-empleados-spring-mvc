@@ -23,6 +23,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,19 +52,28 @@ public class Empleado implements Serializable {
     @NotNull(message = "El nombre no puede estar vacío ")
     @NotBlank(message = "El nombre no puede solo contener espacios en blanco")
     @Size(min = 4, max = 30, message = "El nombre tiene que estar entre 4 y 30 caracteres")
+    @Pattern(regexp = "^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+(\s)?)+$", message = "Sin espacios en blanco al inicio," +
+                                                    "La Primera letra en mayuscula, sin caracteres especiales")
     private String nombre;
 
     @NotNull(message = "El Primer Apellido no puede estar vacío ")
     @NotBlank(message = "El Primer Apellido no puede solo contener espacios en blanco")
     @Size(min = 4, max = 30, message = "El Primer Apellido tiene que estar entre 4 y 30 caracteres")
+    @Pattern(regexp = "^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+(\s)?)+$", message = "La Primera letra en mayuscula," +
+                                                                    "sin caracteres especiales")
     private String primerApellido;
 
+    /* @NotBlank(message = "El Segundo Apellido no puede solo contener espacios en blanco")
+    @Size(max = 45, message = "El Segundo Apellido  no debe superar los 45 caracteres")
+    @Pattern(regexp = "^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+(\s)?)+$", message = "La Primera letra en mayuscula," +
+                                                                    "sin caracteres especiales") */ //Solucionar esto!!! aqui y en el formulario
     private String segundoApellido;
     
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
+    @PastOrPresent(message = "La fecha de alta tiene que ser igual o anterior a la fecha actual")
     private LocalDate fechaAlta;
 
     private BigDecimal salario;
