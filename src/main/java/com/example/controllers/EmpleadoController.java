@@ -1,5 +1,10 @@
 package com.example.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entities.Correo;
 import com.example.entities.Departamento;
@@ -68,7 +74,8 @@ public class EmpleadoController {
         BindingResult result,
         @RequestParam String numerosTelefono,
         @RequestParam String dircorreos,
-        Model model) {
+        Model model,
+        @RequestParam(required = false) MultipartFile file) {
         
             //Comprobar si hay errores en la información procedente del formulario
         if (result.hasErrors()) {
@@ -79,6 +86,26 @@ public class EmpleadoController {
             return "formularioAltaModificacion";
         }
         
+            /*Preguntar si han enviado foto del Empleado y si es asi, guardar el nombre
+            de la foto en la propiedad, atributo o variable donde se guarde la foto
+            y guardar el contengido de la foto como un archivo en el sistema de archivos
+            (files system) del servidor*/
+
+            if (file != null && !file.isEmpty()) {
+                Path rutaRelativa = Paths.get("src/main/resources/static/imagenes");
+                String rutaAbsoluta = rutaRelativa.toFile().getAbsolutePath();
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + file.getOriginalFilename());
+
+                try {
+                    byte[] bytesFotoRecibida = file.getBytes();
+                    Files.write(rutaCompleta, bytesFotoRecibida);
+                    empleado.setFoto(file.getOriginalFilename());
+                } catch (IOException e) { 
+                    e.printStackTrace();
+                }
+            }
+
+
         LOG.info("Objeto Empleado Recibido");
         LOG.info(empleado.toString());
         LOG.info("Numeros de Telefono recibidos: " + numerosTelefono);

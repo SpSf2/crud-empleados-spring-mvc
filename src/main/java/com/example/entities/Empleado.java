@@ -21,6 +21,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -76,6 +77,7 @@ public class Empleado implements Serializable {
     @PastOrPresent(message = "La fecha de alta tiene que ser igual o anterior a la fecha actual")
     private LocalDate fechaAlta;
 
+    @DecimalMin(value = "0", message = "El salario no puede ser negativo")
     private BigDecimal salario;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -88,7 +90,7 @@ public class Empleado implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empleado")
     @Builder.Default
     private Set<Correo> correos = new HashSet<>();
-
-   
+    
+    private String foto;
     
 }

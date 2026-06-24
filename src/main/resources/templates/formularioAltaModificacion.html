@@ -16,7 +16,7 @@ font-weight: bold;
 
     <fieldset>
         <legend>Formulario de Alta o Modificacion</legend>
-        <form th:action="@{/empleados/persistir}" method="post" th:object="${empleado}">
+        <form th:action="@{/empleados/persistir}" method="post" th:object="${empleado}" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}">
         <div>
             <label for="nombre">Nombre:</label>
@@ -47,6 +47,7 @@ font-weight: bold;
         <div>
             <label for="salario">Salario:</label>
             <input type="text" id="salario" name="salario" th:field="*{salario}">
+            <p th:if="${#fields.hasErrors('salario')}"th:errors="*{salario}" class="error">Salario Incorrecto</p>
         </div>
         <div>
             <label for="fechaAlta">Fecha de Alta:</label>
@@ -67,6 +68,10 @@ font-weight: bold;
                 <option value=""></option>
                 <option th:each="dpto : ${departamentos}" th:value="${dpto.id}" th:text="${dpto.nombre}"></option>
             </select>
+        </div>
+        <div>
+            <label for="file">Foto del Empleado</label>
+            <input type="file" id="file" name="file"title="Selecciona un archivo">
         </div>
         <div>
             <button type="submit">Enviar</button>
