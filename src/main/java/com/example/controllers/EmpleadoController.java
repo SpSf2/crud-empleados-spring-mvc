@@ -30,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/empleados")
@@ -158,4 +159,13 @@ public class EmpleadoController {
     }
 
 
+    // Metodo que muestra los detalles de un empleado cuyo id se recibe como parámetro:
+
+    @GetMapping("/details/{id}")
+    public String mostrarDetalles(Model model, @PathVariable(name = "id", required = true) int empleado_id) {
+
+        //Recuperar el empleado cuyo id se recibe como parámetro:
+        model.addAttribute("empleado", empleadoService.getEmpleadoById(empleado_id));
+        return "details";
+    }
 }

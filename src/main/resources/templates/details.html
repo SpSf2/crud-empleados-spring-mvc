@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Empleado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .bloque {
+            margin-bottom: 20px;
+        }
+
+        .mensaje-error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .titulo {
+            font-weight: bold;
+        }
+
+        ul {
+            margin-top: 5px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>
+        Detalles del Empleado
+    </h1>
+
+    <div class="bloque">
+        <span class="titulo">Nombre completo:</span>
+        <span th:text="${empleado.nombre} + ' ' + ${empleado.primerApellido} + ' ' + ${empleado.segundoApellido}"></span>
+    </div>
+
+    <div class="bloque">
+        <span class="titulo">Departamento:</span>
+        <span th:text="${empleado.departamento.nombre}"></span>
+    </div>
+
+    <div class="bloque" th:if="${empleado.telefonos.size() > 0}">
+    <span class="titulo">Teléfonos:</span>
+    <ul>
+        <li th:each="telefono : ${empleado.telefonos}"
+            th:text="${telefono.numero}"></li>
+    </ul>
+</div>
+
+<p class="mensaje-error" th:unless="${empleado.telefonos.size() > 0}">
+    No hay teléfonos registrados.
+</p>
+
+<div class="bloque" th:if="${empleado.correos.size() > 0}">
+    <span class="titulo">Correos:</span>
+    <ul>
+        <li th:each="correo : ${empleado.correos}"
+            th:text="${correo.email}"></li>
+    </ul>
+</div>
+
+<p class="mensaje-error" th:unless="${empleado.correos.size() > 0}">
+    No hay correos registrados.
+</p>
+
+ <div th:if="${empleado.foto != null}">
+    <span class="titulo">Foto:</span>
+    <img th:src="@{'/imagenes/' + ${empleado.foto}}" alt="Foto del Empleado">
+</div>
+
+<p class="mensaje-error" th:unless="${empleado.foto != null}">
+    No se ha agregado una foto de perfil.
+</p>
+
+
+    <a th:href="@{/empleados/listar}">Volver al listado</a>
+
+</body>
+</html>
