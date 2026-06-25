@@ -83,11 +83,11 @@ public class Empleado implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Departamento departamento;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empleado")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empleado", orphanRemoval = true)
     @Builder.Default
     private Set<Telefono> telefonos = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empleado")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empleado", orphanRemoval = true)
     @Builder.Default
     private Set<Correo> correos = new HashSet<>();
     
