@@ -31,7 +31,11 @@
                 <td th:text="${empleado.fechaAlta}"></td>
                 <td><a th:href="@{/empleados/details/}+${empleado.id}">Detalles</a></td>
                 <td><a th:href="@{/empleados/update/}+${empleado.id}">Actualizar</a></td>
-                <td><a th:href="@{/empleados/delete/}+${empleado.id}">Eliminar</a></td>
+                <td><form th:action="@{/empleados/delete/}+${empleado.id}" method="get" class="d-inline"
+                    th:onclick="return confirm('¿Estás seguro de que deseas eliminar a ' + [[${empleado.nombre}]] + ' y todos sus datos?');">
+                    <button type="submit" class="text-danger border-0 bg-transparent p-0 fw-bold">Eliminar</button>
+                    </form></td>
+           <!--     <td><a th:href="@{/empleados/delete/}+${empleado.id}">Eliminar</a></td> -->
 
             </tr>
         </tbody>
