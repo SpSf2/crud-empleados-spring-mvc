@@ -77,7 +77,10 @@ font-weight: bold;
         <div>
             <label for="file">Foto del Empleado</label>
             <input type="file" id="file" name="file"title="Selecciona un archivo">
-            
+                <div th:if="${empleado.id != 0 and empleado.foto != null}">
+                <h4>Foto actual del Empleado:</h4>
+                <img th:src="@{'/imagenes/' + ${empleado.foto}}" alt="Foto del Empleado">
+            </div>
         </div>
         <div>
             <button type="submit">Enviar</button>

@@ -156,12 +156,15 @@ public class EmpleadoController {
         /**
         * Antes de persistir el empleado, hay que eliminar los telefonos y los correos que tenga
         */
-        if (telefonoService.existsByEmpleado(empleado))
-        telefonoService.deleteByEmpleado(empleado);
+        if (empleado.getId() != 0) {
 
-        if (correoService.existsByEmpleado(empleado))
-        correoService.deleteByEmpleado(empleado);
+            if (telefonoService.existsByEmpleado(empleado))
+            telefonoService.deleteByEmpleado(empleado);
 
+            if (correoService.existsByEmpleado(empleado))
+            correoService.deleteByEmpleado(empleado);
+
+        }
          /**Se recibe un objeto Empleado con los datos del formulario, se envia a la
          * capa de servicios para que lo guare en la DB
          */
